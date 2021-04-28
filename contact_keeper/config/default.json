@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://userAdmin:iHuYLc3GFuz626kA@antcluster.vlr0z.mongodb.net/contactsDB?retryWrites=true&w=majority",
+  "jwtSecret": "generate.some.secret.password.for.here"
+}
