@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavbarLayout />
+        <NavbarLayout title={'myapp'}/>
         <h2> anton testing</h2>
       </div>
     );
