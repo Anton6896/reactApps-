@@ -1,13 +1,12 @@
 import './App.css';
 import React from 'react';
-import Navbar from './componentrs/layout/Navbar';
+import NavbarLayout from './components/layout/NavbarLayout';
 
 class App extends React.Component {
-
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <NavbarLayout />
         <h2> anton testing</h2>
       </div>
     );
