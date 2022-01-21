@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavDropdown, Dropdown, Container, Form, FormControl, Button } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
-const NavbarLayout = ({title}) => {
+const NavbarLayout = ({ title }) => {
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar sticky="top" bg="light" expand="lg">
             <Navbar.Brand style={{ margin: '0 0 0 15px' }} href="#home">{title}</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -19,6 +19,17 @@ const NavbarLayout = ({title}) => {
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
+
+                <Form className="d-flex">
+                    <FormControl
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                    />
+                    <Button variant="outline-success"
+                        style={{ margin: '0 50px 0 0' }}>Search</Button>
+                </Form>
             </Navbar.Collapse>
         </Navbar>
     )

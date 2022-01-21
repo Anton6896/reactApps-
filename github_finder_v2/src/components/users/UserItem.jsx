@@ -19,7 +19,6 @@ const UserItem = ({user}) => {
             </Card>
         </Container>
     );
-
 }
 
 export default UserItem;
