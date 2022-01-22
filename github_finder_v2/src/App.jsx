@@ -1,9 +1,11 @@
 import './App.css';
-import React, {useEffect} from 'react';
+import React from 'react';
+import {Alert, Container, Spinner} from 'react-bootstrap';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+
 import NavbarLayout from './components/layout/NavbarLayout';
 import Users from './components/users/users';
-import {Alert, Container, Spinner} from 'react-bootstrap';
-import {typeImplementation} from "@testing-library/user-event/dist/type/typeImplementation";
+import About from "./components/pages/About";
 
 
 class App extends React.Component {
@@ -59,7 +61,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <Router>
                 <NavbarLayout title={'myapp'}
                               searchUser={this.searchUser}
                               clearSearch={this.clearSearch}
@@ -73,18 +75,25 @@ class App extends React.Component {
                 }
 
                 <Container style={{margin: '30px 0 0 0'}}>
-                    {
+                    <Routes>
+                        <Route path='/' element={
+                            <div>
+                                {
+                                    this.state.loading ?
+                                        <Spinner animation="border" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                        :
+                                        <Users users={this.state.users}/>
+                                }
+                            </div>
+                        }/>
 
-                        this.state.loading ?
-                            <Spinner animation="border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
-                            :
-                            <Users users={this.state.users}/>
-                    }
+                        <Route path='/about' element={<About/>}/>
 
+                    </Routes>
                 </Container>
-            </div>
+            </Router>
 
         );
     }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
-import PropTypes from 'prop-types'
+import {Link} from "react-router-dom";
 
 // class NavbarLayout = ({title, searchData, onSearch}) => {
 class NavbarLayout extends Component {
@@ -27,12 +27,15 @@ class NavbarLayout extends Component {
 
         return (
             <Navbar sticky="top" bg="light" expand="lg">
-                <Navbar.Brand style={{margin: '0 0 0 15px'}} href="#home">{title}</Navbar.Brand>
+                {/*<Navbar.Brand style={{margin: '0 0 0 15px'}} href="#home">{title}</Navbar.Brand>*/}
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
+
+                        <Nav.Link as={Link} to={'/'} >Home</Nav.Link>
+                        <Nav.Link as={Link} to={'/about'}>About</Nav.Link>
+
+                        {/*
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -40,6 +43,8 @@ class NavbarLayout extends Component {
                             <NavDropdown.Divider/>
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
+                        */}
+
                     </Nav>
 
                     <Form className="d-flex" onSubmit={this.onSubmit}>
