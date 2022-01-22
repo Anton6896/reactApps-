@@ -18,7 +18,8 @@ class NavbarLayout extends Component {
 
     onSubmit = (e) =>{
         e.preventDefault()
-        this.props.searchUser(this.state.search)
+        this.props.searchUser(this.state.search) // form input name
+        this.setState({search: ''})
     }
 
     render() {
@@ -52,7 +53,7 @@ class NavbarLayout extends Component {
                         />
 
                         {
-                            this.state.search &&
+                            this.props.canClean &&
                             <Button variant="outline-warning"
                                     onClick={this.props.clearSearch}
                                     style={{margin: '0 5px 0 5px'}}>clear</Button>

@@ -1,8 +1,9 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect} from 'react';
 import NavbarLayout from './components/layout/NavbarLayout';
 import Users from './components/users/users';
-import {Container, Spinner} from 'react-bootstrap';
+import {Alert, Container, Spinner} from 'react-bootstrap';
+import {typeImplementation} from "@testing-library/user-event/dist/type/typeImplementation";
 
 
 class App extends React.Component {
@@ -10,6 +11,7 @@ class App extends React.Component {
     state = {
         users: [],
         loading: false,
+        alertText: ''
     }
 
     // componentDidMount = async () => {
@@ -38,12 +40,21 @@ class App extends React.Component {
             this.setState({users: data.items})
             this.setState({loading: false})
         } else {
-
+            // show alert
+            this.showAlert('You must enter name for search users !')
         }
     }
 
     clearSearch = async () => {
-        this.setState({users: []})
+        this.setState({users: [], loading: false})
+    }
+
+    showAlert = (text) => {
+        this.setState({alertText: text})
+
+        setTimeout(() => {
+            this.setState({alertText: ''})
+        }, 3000);
     }
 
     render() {
@@ -51,7 +62,15 @@ class App extends React.Component {
             <div>
                 <NavbarLayout title={'myapp'}
                               searchUser={this.searchUser}
-                              clearSearch={this.clearSearch}/>
+                              clearSearch={this.clearSearch}
+                              canClean={!!this.state.users.length}/>
+
+                {
+                    this.state.alertText &&
+                    <Alert variant={'warning'}>
+                        {this.state.alertText}
+                    </Alert>
+                }
 
                 <Container style={{margin: '30px 0 0 0'}}>
                     {
