@@ -5,7 +5,7 @@ import UserItem from "./UserItem"
 const Users = ({ users }) => {
     return (
         <Row>
-            {users.map(user => (
+            {users && users.map(user => (
                 <Col key={user.id}>
                     <UserItem user={user} />
                 </Col>

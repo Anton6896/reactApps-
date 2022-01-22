@@ -50,9 +50,19 @@ class NavbarLayout extends Component {
                             onChange={this.onchange}
                             aria-label="Search"
                         />
+
+                        {
+                            this.state.search &&
+                            <Button variant="outline-warning"
+                                    onClick={this.props.clearSearch}
+                                    style={{margin: '0 5px 0 5px'}}>clear</Button>
+                        }
+
                         <Button variant="outline-success"
                                 type={"submit"}
                                 style={{margin: '0 50px 0 0'}}>Search</Button>
+
+
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
