@@ -1,8 +1,10 @@
 import React from 'react';
 import { Card, Button, Container } from "react-bootstrap";
+import {Link} from "react-router-dom";
+
 
 const UserItem = ({user}) => {
-    const { avatar_url, login, html_url } = user
+    const { avatar_url, login } = user
 
     return (
         <Container>
@@ -14,7 +16,7 @@ const UserItem = ({user}) => {
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.
                     </Card.Text>
-                    <Button href={html_url}>users_profile</Button>
+                    <Button as={Link} to={`user/${login}`}>user_data</Button>
                 </Card.Body>
             </Card>
         </Container>

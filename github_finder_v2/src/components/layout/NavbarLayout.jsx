@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 import {Link} from "react-router-dom";
 
-// class NavbarLayout = ({title, searchData, onSearch}) => {
 class NavbarLayout extends Component {
     static defaultProps = { // auto load
         title: 'default title'
@@ -67,7 +66,6 @@ class NavbarLayout extends Component {
                         <Button variant="outline-success"
                                 type={"submit"}
                                 style={{margin: '0 50px 0 0'}}>Search</Button>
-
 
                     </Form>
                 </Navbar.Collapse>
