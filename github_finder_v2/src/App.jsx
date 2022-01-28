@@ -36,9 +36,7 @@ class App extends React.Component {
         if (name) {
             this.setState({ loading: true })
 
-            const url = `https://api.github.com/search/users?q=${name}&
-                client_id=${process.env.TOKEN}&
-                client_secret=${process.env.PASSWORD}`
+            const url = `https://api.github.com/search/users?q=${name}&client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
             let res = await fetch(url)
             let data = await res.json()
 
@@ -53,9 +51,7 @@ class App extends React.Component {
     getUserProfile = async (username) => {
         this.setState({ loading: true })
 
-        const url = `https://api.github.com/users/${username}
-                        ?client_id=${process.env.TOKEN}
-                        &client_secret=${process.env.PASSWORD}`
+        const url = `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
         let res = await fetch(url)
         let data = await res.json()
 
@@ -65,9 +61,7 @@ class App extends React.Component {
     getUserRepos = async (username) => {
         this.setState({ loading: true })
 
-        const url = `https://api.github.com/users/${username}/repos
-                        ?client_id=${process.env.TOKEN}
-                        &client_secret=${process.env.PASSWORD}`
+        const url = `https://api.github.com/users/${username}/repos?client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
         let res = await fetch(url)
         let data = await res.json()
 
@@ -123,8 +117,8 @@ class App extends React.Component {
                         } />
 
                         <Route path='/user/:username/repos' element={
-                            <UserRepos getUserRepos={this.getUserRepos} repos={this.state.repos}/>
-                        }/>
+                            <UserRepos getUserRepos={this.getUserRepos} repos={this.state.repos} />
+                        } />
 
                     </Routes>
                 </Container>
