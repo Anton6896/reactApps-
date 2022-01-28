@@ -6,6 +6,7 @@ import NavbarLayout from './components/layout/NavbarLayout';
 import Users from './components/users/users';
 import About from "./components/pages/About";
 import UserProfile from './components/users/UserProfile';
+import UserRepos from './components/users/UserRepos'
 
 
 class App extends React.Component {
@@ -121,11 +122,13 @@ class App extends React.Component {
                             <UserProfile getUserProfile={this.getUserProfile} user={this.state.user} />
                         } />
 
+                        <Route path='/user/:username/repos' element={
+                            <UserRepos getUserRepos={this.getUserRepos} repos={this.state.repos}/>
+                        }/>
 
                     </Routes>
                 </Container>
             </Router>
-
         );
     }
 }
