@@ -13,6 +13,7 @@ class App extends React.Component {
     state = {
         users: [],
         user: {},
+        repos: [],
         loading: false,
         alertText: ''
     }
@@ -60,6 +61,18 @@ class App extends React.Component {
         this.setState({ loading: false, user: data })
     }
 
+    getUserRepos = async (username) => {
+        this.setState({ loading: true })
+
+        const url = `https://api.github.com/users/${username}/repos
+                        ?client_id=${process.env.TOKEN}
+                        &client_secret=${process.env.PASSWORD}`
+        let res = await fetch(url)
+        let data = await res.json()
+
+        this.setState({ loading: false, repos: data })
+    }
+
     clearSearch = async () => {
         this.setState({ users: [], loading: false })
     }
@@ -87,7 +100,7 @@ class App extends React.Component {
                     </Alert>
                 }
 
-                <Container style={{ margin: '30px 0 0 0' }}>
+                <Container style={{ marginTop: '30px' }}>
                     <Routes>
                         <Route path='/' element={
                             <div>
