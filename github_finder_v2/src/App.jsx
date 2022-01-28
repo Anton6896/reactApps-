@@ -51,7 +51,7 @@ class App extends React.Component {
     getUserProfile = async (username) => {
         this.setState({ loading: true })
 
-        const url = `https://api.github.com/search/users/${username}
+        const url = `https://api.github.com/users/${username}
                         ?client_id=${process.env.TOKEN}
                         &client_secret=${process.env.PASSWORD}`
         let res = await fetch(url)
@@ -104,8 +104,9 @@ class App extends React.Component {
 
                         <Route path='/about' element={<About />} />
 
-
-                        <Route path='/user/:username' element={<UserProfile />} />
+                        <Route path='/user/:username' element={
+                            <UserProfile getUserProfile={this.getUserProfile} user={this.state.user} />
+                        } />
 
 
                     </Routes>
