@@ -60,11 +60,9 @@ class App extends React.Component {
 
     getUserRepos = async (username) => {
         this.setState({ loading: true })
-
         const url = `https://api.github.com/users/${username}/repos?client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
         let res = await fetch(url)
         let data = await res.json()
-
         this.setState({ loading: false, repos: data })
     }
 
