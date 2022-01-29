@@ -1,78 +1,68 @@
-import React, {Component} from 'react';
-import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
-import {Link} from "react-router-dom";
+import React, { useState } from 'react';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 
-class NavbarLayout extends Component {
-    static defaultProps = { // auto load
-        title: 'default title'
+
+export default function NavbarLayout({ title, searchUser, clearSearch, canClean }) {
+
+    const [search, setSearch] = useState('')
+
+    const onchange = (e) => {
+        setSearch(e.target.value)
     }
 
-    state = {
-        search: ''
-    }
-
-    onchange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
-    }
-
-    onSubmit = (e) =>{
+    const onSubmit = (e) => {
         e.preventDefault()
-        this.props.searchUser(this.state.search) // form input name
-        this.setState({search: ''})
+        searchUser(search)
+        setSearch('')
     }
 
-    render() {
-        let {title} = this.props
 
-        return (
-            <Navbar sticky="top" bg="light" expand="lg">
-                {/*<Navbar.Brand style={{margin: '0 0 0 15px'}} href="#home">{title}</Navbar.Brand>*/}
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
+    return (
+        <Navbar sticky="top" bg="light" expand="lg">
+            <Navbar.Brand as={Link} to={'/'} style={{marginLeft: '20px'}}>{title}</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
 
-                        <Nav.Link as={Link} to={'/'} >Home</Nav.Link>
-                        <Nav.Link as={Link} to={'/about'}>About</Nav.Link>
+                    <Nav.Link as={Link} to={'/'} >Home</Nav.Link>
+                    <Nav.Link as={Link} to={'/about'}>About</Nav.Link>
 
-                        {/*
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
-                        */}
+                    {/*                     
+                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown.Divider/>
+                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    </NavDropdown>
+                     */}
 
-                    </Nav>
+                </Nav>
 
-                    <Form className="d-flex" onSubmit={this.onSubmit}>
-                        <FormControl
-                            type="search"
-                            name={"search"}
-                            placeholder="Search"
-                            className="me-2"
-                            onChange={this.onchange}
-                            aria-label="Search"
-                        />
+                <Form className="d-flex" onSubmit={onSubmit}>
+                    <FormControl
+                        type="search"
+                        value={search}
+                        placeholder="Search"
+                        className="me-2"
+                        onChange={onchange}
+                        aria-label="Search"
+                    />
 
-                        {
-                            this.props.canClean &&
-                            <Button variant="outline-warning"
-                                    onClick={this.props.clearSearch}
-                                    style={{margin: '0 5px 0 5px'}}>clear</Button>
-                        }
+                    {
+                        canClean &&
+                        <Button variant="outline-warning"
+                            onClick={clearSearch}
+                            style={{ margin: '0 5px 0 5px' }}>clear</Button>
+                    }
 
-                        <Button variant="outline-success"
-                                type={"submit"}
-                                style={{margin: '0 50px 0 0'}}>Search</Button>
+                    <Button variant="outline-success"
+                        type={"submit"}
+                        style={{ margin: '0 50px 0 0' }}>Search</Button>
 
-                    </Form>
-                </Navbar.Collapse>
-            </Navbar>
-        )
-    }
+                </Form>
+            </Navbar.Collapse>
+        </Navbar>
+    )
 }
-
-
-export default NavbarLayout;

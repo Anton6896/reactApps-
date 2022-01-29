@@ -84,7 +84,8 @@ class App extends React.Component {
                 <NavbarLayout title={'myapp'}
                     searchUser={this.searchUser}
                     clearSearch={this.clearSearch}
-                    canClean={!!this.state.users.length} />
+                    canClean={!!this.state.users.length}
+                />
 
                 {
                     this.state.alertText &&
