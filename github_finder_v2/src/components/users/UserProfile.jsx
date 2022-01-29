@@ -10,7 +10,7 @@ export default function UserProfile({ getUserProfile, user }) {
 
     useEffect(() => {
         getUserProfile(username)
-    }, [getUserProfile, username]);
+    }, []);
 
     return (
         <div>
@@ -42,7 +42,5 @@ export default function UserProfile({ getUserProfile, user }) {
                 </Table>
             </div>
         </div>
-
     );
 }
-

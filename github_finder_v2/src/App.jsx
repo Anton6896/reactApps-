@@ -21,13 +21,13 @@ export default function App() {
     const searchUser = async (name) => {
         if (name) {
             setLoading(true)
-            const url = `https://api.github.com/search/users?q=${name}&client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
+            const url = `https://api.github.com/search/users?q=${name}&per_page=7&client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
             let res = await fetch(url)
             let data = await res.json()
             setUsers(data.items)
             setLoading(false)
         } else {
-            this.showAlert('You must enter name for search users !')
+            showAlert('You must enter name for search users !')
         }
     }
 
@@ -71,14 +71,12 @@ export default function App() {
                 canClean={!!users.length}
             />
 
-            {
-                alertText &&
-                <Alert variant={'warning'}>
-                    {alertText}
-                </Alert>
-            }
+
 
             <Container style={{ marginTop: '30px' }}>
+
+                {alertText && <Alert variant={'primary'}>{alertText}</Alert>}
+
                 <Routes>
                     <Route path='/' element={
                         <div>

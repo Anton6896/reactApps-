@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function UserRepos({ getUserRepos, repos }) {
@@ -7,7 +7,7 @@ export default function UserRepos({ getUserRepos, repos }) {
 
   useEffect(() => {
     getUserRepos(username)
-  }, [getUserRepos, username]);
+  }, []);
 
 
   return (
@@ -15,13 +15,13 @@ export default function UserRepos({ getUserRepos, repos }) {
       <h3> user repos data</h3>
 
       {
-        repos && repos.map(e => {
+        !!repos.length ? repos.map(e => {
           return (
             <div key={e.id}>
               <p> element id: {e.id}, full name: {e.full_name}</p>
             </div>
           )
-        })
+        }) : <h3> cant get data </h3> 
       }
 
     </div>
