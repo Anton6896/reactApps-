@@ -9,3 +9,12 @@ import {
     SET_LOADING,
     SET_ALERT,
 } from '../types'
+
+const GithubState = props => {
+    const initialState = {
+        users: [],
+        user: {},
+        repos: [],
+        loading: false
+    }
+}
