@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, Container, Spinner } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -9,121 +9,103 @@ import UserProfile from './components/users/UserProfile';
 import UserRepos from './components/users/UserRepos'
 
 
-class App extends React.Component {
+export default function App() {
 
-    state = {
-        users: [],
-        user: {},
-        repos: [],
-        loading: false,
-        alertText: ''
-    }
+    const [users, setUsers] = useState([])
+    const [user, setUser] = useState({})
+    const [repos, setRepos] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [alertText, setAlertText] = useState('')
 
-    // componentDidMount = async () => {
-    //     this.setState({loading: true})
-    //
-    //     const url = `https://api.github.com/users?per_page=10&
-    //     client_id=${process.env.TOKEN}&
-    //     client_secret=${process.env.PASSWORD}`
-    //     let res = await fetch(url)
-    //     let data = await res.json()
-    //
-    //     this.setState({users: data})
-    //     this.setState({loading: false})
-    // }
 
-    searchUser = async (name) => {
+    const searchUser = async (name) => {
         if (name) {
-            this.setState({ loading: true })
-
+            setLoading(true)
             const url = `https://api.github.com/search/users?q=${name}&client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
             let res = await fetch(url)
             let data = await res.json()
-
-            this.setState({ users: data.items })
-            this.setState({ loading: false })
+            setUsers(data.items)
+            setLoading(false)
         } else {
-            // show alert
             this.showAlert('You must enter name for search users !')
         }
     }
 
-    getUserProfile = async (username) => {
-        this.setState({ loading: true })
-
+    const getUserProfile = async (username) => {
+        setLoading(true)
         const url = `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
         let res = await fetch(url)
         let data = await res.json()
-
-        this.setState({ loading: false, user: data })
+        setUser(data)
+        setLoading(false)
     }
 
-    getUserRepos = async (username) => {
-        this.setState({ loading: true })
+    const getUserRepos = async (username) => {
+        setLoading(true)
         const url = `https://api.github.com/users/${username}/repos?client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
         let res = await fetch(url)
         let data = await res.json()
-        this.setState({ loading: false, repos: data })
+        setRepos(data)
+        setLoading(false)
     }
 
-    clearSearch = async () => {
-        this.setState({ users: [], loading: false })
+    const clearSearch = async () => {
+        setUsers([])
+        setLoading(false)
     }
 
-    showAlert = (text) => {
-        this.setState({ alertText: text })
+    const showAlert = (text) => {
+        setAlertText(text)
 
         setTimeout(() => {
-            this.setState({ alertText: '' })
+            setAlertText('')
         }, 3000);
     }
 
-    render() {
-        return (
-            <Router>
-                <NavbarLayout title={'myapp'}
-                    searchUser={this.searchUser}
-                    clearSearch={this.clearSearch}
-                    canClean={!!this.state.users.length}
-                />
 
-                {
-                    this.state.alertText &&
-                    <Alert variant={'warning'}>
-                        {this.state.alertText}
-                    </Alert>
-                }
+    return (
+        <Router>
+            <NavbarLayout title={'myapp'}
+                searchUser={searchUser}
+                clearSearch={clearSearch}
+                canClean={!!users.length}
+            />
 
-                <Container style={{ marginTop: '30px' }}>
-                    <Routes>
-                        <Route path='/' element={
-                            <div>
-                                {
-                                    this.state.loading ?
-                                        <Spinner animation="border" role="status">
-                                            <span className="visually-hidden">Loading...</span>
-                                        </Spinner>
-                                        :
-                                        <Users users={this.state.users} />
-                                }
-                            </div>
-                        } />
+            {
+                alertText &&
+                <Alert variant={'warning'}>
+                    {alertText}
+                </Alert>
+            }
 
-                        <Route path='/about' element={<About />} />
+            <Container style={{ marginTop: '30px' }}>
+                <Routes>
+                    <Route path='/' element={
+                        <div>
+                            {
+                                loading ?
+                                    <Spinner animation="border" role="status">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </Spinner>
+                                    :
+                                    <Users users={users} />
+                            }
+                        </div>
+                    } />
 
-                        <Route path='/user/:username' element={
-                            <UserProfile getUserProfile={this.getUserProfile} user={this.state.user} />
-                        } />
+                    <Route path='/about' element={<About />} />
 
-                        <Route path='/user/:username/repos' element={
-                            <UserRepos getUserRepos={this.getUserRepos} repos={this.state.repos} />
-                        } />
+                    <Route path='/user/:username' element={
+                        <UserProfile getUserProfile={getUserProfile} user={user} />
+                    } />
 
-                    </Routes>
-                </Container>
-            </Router>
-        );
-    }
+                    <Route path='/user/:username/repos' element={
+                        <UserRepos getUserRepos={getUserRepos} repos={repos} />
+                    } />
+
+                </Routes>
+            </Container>
+        </Router>
+    );
+
 }
-
-export default App;

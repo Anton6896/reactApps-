@@ -3,7 +3,7 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-boots
 import { Link } from "react-router-dom";
 
 
-export default function NavbarLayout({ title, searchUser, clearSearch, canClean }) {
+export default function NavbarLayout({ title='default', searchUser, clearSearch, canClean }) {
 
     const [search, setSearch] = useState('')
 
