@@ -7,7 +7,7 @@ import Users from './components/users/users';
 import About from "./components/pages/About";
 import UserProfile from './components/users/UserProfile';
 import UserRepos from './components/users/UserRepos'
-
+import GithubState from './context/githubState';
 
 export default function App() {
 
@@ -64,46 +64,45 @@ export default function App() {
 
 
     return (
-        <Router>
-            <NavbarLayout title={'myapp'}
-                searchUser={searchUser}
-                clearSearch={clearSearch}
-                canClean={!!users.length}
-            />
+        <GithubState>
+            <Router>
+                <NavbarLayout title={'myapp'}
+                    searchUser={searchUser}
+                    clearSearch={clearSearch}
+                    canClean={!!users.length}
+                />
+                <Container style={{ marginTop: '30px' }}>
 
+                    {alertText && <Alert variant={'primary'}>{alertText}</Alert>}
 
+                    <Routes>
+                        <Route path='/' element={
+                            <div>
+                                {
+                                    loading ?
+                                        <Spinner animation="border" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                        :
+                                        <Users users={users} />
+                                }
+                            </div>
+                        } />
 
-            <Container style={{ marginTop: '30px' }}>
+                        <Route path='/about' element={<About />} />
 
-                {alertText && <Alert variant={'primary'}>{alertText}</Alert>}
+                        <Route path='/user/:username' element={
+                            <UserProfile getUserProfile={getUserProfile} user={user} />
+                        } />
 
-                <Routes>
-                    <Route path='/' element={
-                        <div>
-                            {
-                                loading ?
-                                    <Spinner animation="border" role="status">
-                                        <span className="visually-hidden">Loading...</span>
-                                    </Spinner>
-                                    :
-                                    <Users users={users} />
-                            }
-                        </div>
-                    } />
+                        <Route path='/user/:username/repos' element={
+                            <UserRepos getUserRepos={getUserRepos} repos={repos} />
+                        } />
 
-                    <Route path='/about' element={<About />} />
-
-                    <Route path='/user/:username' element={
-                        <UserProfile getUserProfile={getUserProfile} user={user} />
-                    } />
-
-                    <Route path='/user/:username/repos' element={
-                        <UserRepos getUserRepos={getUserRepos} repos={repos} />
-                    } />
-
-                </Routes>
-            </Container>
-        </Router>
+                    </Routes>
+                </Container>
+            </Router>
+        </GithubState>
     );
 
 }
