@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
 import { Link } from "react-router-dom";
+import GithubContext from "../../context/githubContext";
 
 
-export default function NavbarLayout({ title='default', searchUser, clearSearch, canClean }) {
-
+export default function NavbarLayout({ title='default', clearSearch, canClean }) {
+    const githubContext = useContext(GithubContext)
     const [search, setSearch] = useState('')
 
     const onchange = (e) => {
@@ -13,10 +14,9 @@ export default function NavbarLayout({ title='default', searchUser, clearSearch,
 
     const onSubmit = (e) => {
         e.preventDefault()
-        searchUser(search)
+        githubContext.searchUser(search)
         setSearch('')
     }
-
 
     return (
         <Navbar sticky="top" bg="light" expand="lg">

@@ -18,18 +18,18 @@ export default function App() {
     const [alertText, setAlertText] = useState('')
 
 
-    const searchUser = async (name) => {
-        if (name) {
-            setLoading(true)
-            const url = `https://api.github.com/search/users?q=${name}&per_page=7&client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
-            let res = await fetch(url)
-            let data = await res.json()
-            setUsers(data.items)
-            setLoading(false)
-        } else {
-            showAlert('You must enter name for search users !')
-        }
-    }
+    // const searchUser = async (name) => {
+    //     if (name) {
+    //         setLoading(true)
+    //         const url = `https://api.github.com/search/users?q=${name}&per_page=7&client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
+    //         let res = await fetch(url)
+    //         let data = await res.json()
+    //         setUsers(data.items)
+    //         setLoading(false)
+    //     } else {
+    //         showAlert('You must enter name for search users !')
+    //     }
+    // }
 
     const getUserProfile = async (username) => {
         setLoading(true)
@@ -54,20 +54,19 @@ export default function App() {
         setLoading(false)
     }
 
-    const showAlert = (text) => {
-        setAlertText(text)
-
-        setTimeout(() => {
-            setAlertText('')
-        }, 3000);
-    }
+    // const showAlert = (text) => {
+    //     setAlertText(text)
+    //
+    //     setTimeout(() => {
+    //         setAlertText('')
+    //     }, 3000);
+    // }
 
 
     return (
         <GithubState>
             <Router>
                 <NavbarLayout title={'myapp'}
-                    searchUser={searchUser}
                     clearSearch={clearSearch}
                     canClean={!!users.length}
                 />
@@ -104,5 +103,4 @@ export default function App() {
             </Router>
         </GithubState>
     );
-
 }
