@@ -3,7 +3,7 @@ import GithubContext from "./githubContext";
 import GithubReducer from "./githubReduser";
 import {types} from "../types";
 
-export default function GithubState(props) {
+const GithubState = (props) => {
     const initialState = {
         users: [],
         user: {},
@@ -12,7 +12,7 @@ export default function GithubState(props) {
         alertText: ''
     }
 
-    const [state, dispatch] = useReducer(GithubReducer, initialState)
+    const [state, dispatch] = useReducer(GithubReducer, initialState);
 
     const setLoading = () => {
         dispatch({type: types.SET_LOADING})
@@ -48,18 +48,53 @@ export default function GithubState(props) {
         }
     }
 
+    const clearSearch = async () => {
+        dispatch({
+            type: types.CLEAR_USERS
+        })
+    }
 
-    return (<GithubContext.Provider
-        value={{
-            users: state.users,
-            user: state.user,
-            repos: state.repos,
-            loading: state.loading,
-            searchUser
+    const getUserProfile = async (username) => {
+        setLoading()
+        const url = `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
+        let res = await fetch(url)
+        let data = await res.json()
+        dispatch({
+            type: types.GET_USER,
+            payload: data
+        })
+    }
 
-        }}>
-        {props.children}
+    const getUserRepos = async (username) => {
+        setLoading()
+        const url = `https://api.github.com/users/${username}/repos?client_id=${process.env.REACT_APP_TOKEN}&client_secret=${process.env.REACT_APP_PASSWORD}`
+        let res = await fetch(url)
+        let data = await res.json()
 
-    </GithubContext.Provider>)
+        dispatch({
+            type: types.GET_REPOS,
+            payload: data
+        })
+    }
+
+
+    return (
+        <GithubContext.Provider
+            value={{
+                users: state.users,
+                user: state.user,
+                repos: state.repos,
+                loading: state.loading,
+                alertText: state.alertText,
+
+                searchUser,
+                clearSearch,
+                getUserProfile,
+                getUserRepos
+            }}>
+            {props.children}
+        </GithubContext.Provider>
+    )
 }
 
+export default GithubState;

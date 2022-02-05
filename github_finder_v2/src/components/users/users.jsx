@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Row, Col } from "react-bootstrap";
 import UserItem from "./UserItem"
+import GithubContext from "../../context/githubContext";
 
-const Users = ({ users }) => {
+const Users = () => {
+    const context = useContext(GithubContext)
+    let {users} = context
+
     return (
         <Row>
             {users && users.map(user => (

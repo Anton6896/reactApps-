@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import GithubContext from "../../context/githubContext";
 
 
-export default function NavbarLayout({ title='default', clearSearch, canClean }) {
-    const githubContext = useContext(GithubContext)
+export default function NavbarLayout({ title='default'}) {
+
+    const context = useContext(GithubContext)
+    let {searchUser, users, clearSearch} = context
+
     const [search, setSearch] = useState('')
 
     const onchange = (e) => {
@@ -14,7 +17,7 @@ export default function NavbarLayout({ title='default', clearSearch, canClean })
 
     const onSubmit = (e) => {
         e.preventDefault()
-        githubContext.searchUser(search)
+        searchUser(search)
         setSearch('')
     }
 
@@ -51,7 +54,7 @@ export default function NavbarLayout({ title='default', clearSearch, canClean })
                     />
 
                     {
-                        canClean &&
+                        !!users.length &&
                         <Button variant="outline-warning"
                             onClick={clearSearch}
                             style={{ margin: '0 5px 0 5px' }}>clear</Button>

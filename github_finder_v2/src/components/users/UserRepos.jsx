@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, {useContext, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import GithubContext from "../../context/githubContext";
 
-export default function UserRepos({ getUserRepos, repos }) {
+export default function UserRepos() {
 
   let { username } = useParams()
+  const context = useContext(GithubContext)
+  let {getUserRepos, repos} = context
 
   useEffect(() => {
     getUserRepos(username)

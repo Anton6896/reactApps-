@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useParams } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
 import { Button } from 'react-bootstrap';
 import {Link} from "react-router-dom";
+import GithubContext from "../../context/githubContext";
 
 
-export default function UserProfile({ getUserProfile, user }) {
+export default function UserProfile() {
     let { username } = useParams()
+    const context = useContext(GithubContext)
+    let {getUserProfile, user} = context
+
 
     useEffect(() => {
         getUserProfile(username)
