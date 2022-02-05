@@ -3,7 +3,7 @@ import GithubContext from "./githubContext";
 import GithubReducer from "./githubReduser";
 import {types} from "../types";
 
-const GithubState = (props) => {
+export default function GithubState(props) {
     const initialState = {
         users: [],
         user: {},
@@ -77,7 +77,6 @@ const GithubState = (props) => {
         })
     }
 
-
     return (
         <GithubContext.Provider
             value={{
@@ -96,5 +95,3 @@ const GithubState = (props) => {
         </GithubContext.Provider>
     )
 }
-
-export default GithubState;
