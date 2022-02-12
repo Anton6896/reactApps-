@@ -37,7 +37,7 @@ export default function LogsComponent() {
             {
                 <ListGroup as="ul">
                     <ListGroup.Item as="li" variant='primary'>
-                        All logs
+                        <p className='text-center mb-0 mt-0'>all logs</p>
                     </ListGroup.Item>
 
                     {
