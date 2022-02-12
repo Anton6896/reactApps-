@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import LogItem from './LogItemComponent'
-import { ListGroup } from 'react-bootstrap'
-
+import { ListGroup, Spinner } from 'react-bootstrap'
+import FloatingAdd from './FloatingAdd'
 
 export default function LogsComponent() {
 
@@ -26,8 +26,10 @@ export default function LogsComponent() {
 
     if (login) {
         return (
-            <dev>
-                <p> Loaging ...</p>
+            <dev className='d-flex justify-content-center'>
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </dev>
         )
     }
@@ -41,7 +43,7 @@ export default function LogsComponent() {
                     </ListGroup.Item>
 
                     {
-                        logs.map(l => ( 
+                        logs.map(l => (
                             <div key={l.id}>
                                 <LogItem item={l} />
                             </div>
@@ -51,6 +53,7 @@ export default function LogsComponent() {
                 </ListGroup>
             }
 
+            <FloatingAdd/>
 
         </div>
     )
