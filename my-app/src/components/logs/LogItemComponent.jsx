@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function LogItem({item}) {
+
+
+export default function LogItem({ item }) {
+
+
   return (
     <div>
-      <p>{item.message}</p>
+      <p>{item.message} </p>
+
+
     </div>
   )
 }
