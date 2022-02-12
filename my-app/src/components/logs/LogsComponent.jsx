@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import LogItem from './LogItemComponent'
-import { ListGroup, Modal, Button } from 'react-bootstrap'
+import { ListGroup } from 'react-bootstrap'
 
 
 export default function LogsComponent() {
@@ -9,8 +9,6 @@ export default function LogsComponent() {
     const [login, setLogin] = useState(false)
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     let getLogs = async () => {
         setLogin(true)

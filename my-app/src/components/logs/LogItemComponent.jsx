@@ -18,16 +18,14 @@ export default function LogItem({ item }) {
           </div>
 
           <div className='col-lg-2'>
-            {
-              <Badge pill bg={item.attention ? "danger" : "success"}>
-                {item.attention ? "need atention" : "all done"}
-              </Badge> 
-            }
+            <Badge pill bg={item.attention ? "danger" : "success"}>
+              {item.attention ? "need atention" : "all done"}
+            </Badge>
           </div>
 
           <div className='col-lg-2'>
-            <Button variant="primary" onClick={handleShow}>
-              update data
+            <Button variant="info" onClick={handleShow}>
+              update log
             </Button>
           </div>
         </div>
@@ -43,7 +41,8 @@ export default function LogItem({ item }) {
           <Modal.Title>tech: {item.tech}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {item.message}
+          <p>{item.message}</p>
+          <p>{item.date}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
