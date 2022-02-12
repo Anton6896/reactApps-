@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import LogItem from './LogItemComponent'
-import { ListGroup } from 'react-bootstrap'
+import { ListGroup, Modal, Button } from 'react-bootstrap'
 
 
 export default function LogsComponent() {
 
-    let [logs, setLogs] = useState([])
-    let [login, setLogin] = useState(false)
+    const [logs, setLogs] = useState([])
+    const [login, setLogin] = useState(false)
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     let getLogs = async () => {
         setLogin(true)
@@ -35,18 +39,21 @@ export default function LogsComponent() {
             {
                 <ListGroup as="ul">
                     <ListGroup.Item as="li" variant='primary'>
-                        Cras justo odio
+                        All logs
                     </ListGroup.Item>
 
                     {
-                        logs.map(l => (
-                            <ListGroup.Item key={l.id} as="li">{l.message}</ListGroup.Item>
+                        logs.map(l => ( 
+                            <div key={l.id}>
+                                <LogItem item={l} />
+                            </div>
+
                         ))
                     }
-                    
-                    
                 </ListGroup>
             }
+
+
         </div>
     )
 }
