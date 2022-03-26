@@ -18,14 +18,18 @@ let Contacts = () => {
                         context.filtered.map(
                             contact =>
                                 <CSSTransition // fade effect
-                                    key={contact.id} timeout={500} classNames={"item"}>
+                                    key={contact.id} 
+                                    timeout={500} 
+                                    classNames={"item"}>
                                     <ContactItem contact={contact}/>
                                 </CSSTransition>
                         ) :
                         context.contacts.map(
                             contact =>
                                 <CSSTransition
-                                    key={contact.id} timeout={500} classNames={"item"}>
+                                    key={contact.id} 
+                                    timeout={500} 
+                                    classNames={"item"}>
                                     <ContactItem contact={contact}/>
                                 </CSSTransition>
                         )
