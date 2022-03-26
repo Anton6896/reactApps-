@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js'
 
-class App extends Component {
-  render() {
-    return (
-      <div> testing </div>
-    );
-  }
+export default function App() {
+  return (
+    <div>
+      <p>testing </p>
+    </div>
+  );
 }
-
-export default App;
