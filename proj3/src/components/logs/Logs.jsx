@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import LogItem from "./LogItem";
+import LoaderDiv from "../layout/Preloader";
 
 const Logs = () => {
     const [logs, setLogs] = useState([])
@@ -19,7 +20,7 @@ const Logs = () => {
     }, [])
 
     if (loading) {
-        return <div><p>Loading ...</p></div>
+        return <LoaderDiv/>
     }
 
     return (
