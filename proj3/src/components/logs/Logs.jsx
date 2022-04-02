@@ -32,7 +32,6 @@ const Logs = () => {
             </ul>
         </div>
     )
-
 }
 
 export default Logs;
