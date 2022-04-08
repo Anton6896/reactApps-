@@ -1,20 +1,22 @@
 import React, {useState} from "react";
+import M from 'materialize-css/dist/js/materialize.min.js'
 
-const AddLogModal = () => {
+const EditLogModal = () => {
     const [message, setMessage] = useState('')
     const [tech, setTech] = useState('')
     const [attention, setAttention] = useState(false)
 
     const onSubmit = () => {
-        console.log(message)
-        console.log(tech)
-        console.log(attention)
+        if (message === '' || tech === ''){
+            M.toast({html: 'Please fill form '})
+        }
+
     }
 
     return (
-        <div id={'add-log-modal'} className={'modal'} style={modalStyle}>
+        <div id={'edit-log-modal'} className={'modal'} style={modalStyle}>
             <div className="modal-content">
-                <h4>enter sys log</h4>
+                <h4>Edit sys log</h4>
 
                 <div className={'row'}>
                     <span className={'input-field'}>
@@ -60,7 +62,7 @@ const AddLogModal = () => {
             <div className="modal-footer">
                 <a href="#"
                    onClick={onSubmit}
-                   className="modal-close waves-effect waves-green btn-flat">Agree</a>
+                   className="modal-close waves-effect blue waves-light btn">Agree</a>
             </div>
         </div>
     )
@@ -71,4 +73,4 @@ const modalStyle = {
     height: '75%'
 }
 
-export default AddLogModal;
+export default EditLogModal;

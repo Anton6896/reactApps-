@@ -5,7 +5,9 @@ import M from 'materialize-css/dist/js/materialize.min.js'
 import NavBar from './components/layout/NavBar';
 import Logs from './components/logs/Logs'
 import AddBtn from "./components/layout/AddBtn";
-import AddLogModal from "./components/logs/AddLogModal";
+import AddLogModal from "./components/modals/AddLogModal";
+import EditLogModal from "./components/modals/EditLogModal";
+import AddTechModal from "./components/modals/AddTechModal";
 
 export default function App() {
 
@@ -19,6 +21,8 @@ export default function App() {
             <div className={"container"}>
                 <Logs/>
                 <AddLogModal/>
+                <EditLogModal/>
+                <AddTechModal/>
                 <AddBtn/>
             </div>
 
