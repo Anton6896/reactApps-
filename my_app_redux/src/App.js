@@ -1,11 +1,14 @@
 import React from 'react';
 
-export default function App() {
-  return (
-    <div>
-      <p>testing</p>
-    </div>
-  );
+import {Provider} from "react-redux";
+import {store} from "./state/store";
+import TestComponent from "./components/TestComponent";
 
+function App() {
+    return (
+        <Provider store={store}>
+            <TestComponent/>
+        </Provider>);
 }
 
+export default App

@@ -6,41 +6,20 @@ export const setLoading = () => {
     }
 }
 
-// function that return a function (thunk lib do background work for that (dispatch))
-// export const getLogs = () => async dispatch => {
-//     try {
-//         setLoading()
-//         const res = await fetch('/logs')
-//         const data = await res.json()
-//         dispatch({
-//             type: type.GET_LOGS,
-//             payload: data
-//         })
+export const getLogs = () => async (dispatch) => {
+    try {
+        setLoading()
+        const res = await fetch('/logs')
+        const data = await res.json()
+        dispatch({
+            type: type.GET_LOGS,
+            payload: data
+        })
 
-//     } catch (e) {
-//         dispatch({
-//             type: type.LOGS_ERROR,
-//             payload: e.response.data
-//         })
-//     }
-// }
-
-export const getLogs = () => {
-    return async (dispatch) => {
-        try {
-            setLoading()
-            const res = await fetch('/logs')
-            const data = await res.json()
-            dispatch({
-                type: type.GET_LOGS,
-                payload: data
-            })
-
-        } catch (e) {
-            dispatch({
-                type: type.LOGS_ERROR,
-                payload: e.response.data
-            })
-        }
+    } catch (e) {
+        dispatch({
+            type: type.LOGS_ERROR,
+            payload: e.response.data
+        })
     }
 }

@@ -1,9 +1,13 @@
-const accountReducer = (state = 0, action) => {
+const initialState = 0;
+
+const accountReducer = (state = initialState, action) => {
+    console.log(action)
+
     switch (action.type) {
         case "deposit":
-            return state++
+            return state += action.payload
         case "withdraw":
-            return state--
+            return state -= action.payload
 
         default:
             return state

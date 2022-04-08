@@ -1,8 +1,10 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 
 import logReducer from "./logReducer";
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
     log: logReducer
 })
+
+export default rootReducer
 
