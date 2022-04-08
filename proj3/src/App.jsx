@@ -10,7 +10,7 @@ import EditLogModal from "./components/modals/EditLogModal";
 import AddTechModal from "./components/modals/AddTechModal";
 
 import {Provider} from "react-redux";
-import store from "./store";
+import store from "./state/store";
 
 export default function App() {
 

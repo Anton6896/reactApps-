@@ -6,10 +6,8 @@ import rootReducer from './reducers'
 const initialState = {}
 const middleware = [logger, thunk]
 
-const store = createStore(
+export default createStore(
     rootReducer,
     initialState,
     applyMiddleware(...middleware)
 )
-
-export default store

@@ -1,40 +1,35 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import LogItem from "./LogItem";
 import LoaderDiv from "../layout/Preloader";
+import { useSelector, useDispatch } from "react-redux"
+import { bindActionCreators } from "redux"
+import * as action from '../../state/actions/logActions'
 
 const Logs = () => {
-    const [logs, setLogs] = useState([])
-    const [loading, setLoading] = useState(false)
 
-    const getlogs = async () => {
-
-        setLoading(true)
-        let res = await fetch('/logs')
-        let data = await res.json()
-        setLogs(data)
-        console.log(data)
-        setLoading(false)
-
-    }
+    const { loading, logs } = useSelector((state) => state.log)
+    const dispatch = useDispatch()
+    const ac = bindActionCreators(action, dispatch)
 
     useEffect(() => {
-        getlogs()
+        ac.getLogs()
     }, [])
 
-    if (loading) {
-        return <LoaderDiv/>
+    if (loading || logs === null) {
+        return <LoaderDiv />
     }
 
     return (
         <div>
             <ul className={"collection with-header"}>
-                <li className={"collection-header"} style={{textAlign: "center"}}><b>Sys Logs</b></li>
+                <li className={"collection-header"} style={{ textAlign: "center" }}><b>Sys Logs</b></li>
                 {!loading && logs.length === 0 ?
                     (<p>No logs to show</p>) :
-                    (logs.map(log => <LogItem  log={log} key={log.id}/>))}
+                    (logs.map(log => <LogItem log={log} key={log.id} />))}
             </ul>
         </div>
     )
 }
+
 
 export default Logs;
