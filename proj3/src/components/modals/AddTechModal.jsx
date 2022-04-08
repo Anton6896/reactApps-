@@ -1,6 +1,11 @@
 import React, {useState} from "react";
 import M from 'materialize-css/dist/js/materialize.min.js'
 
+const modalStyle = {
+    width: '40%',
+    height: '40%'
+}
+
 const EditLogModal = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -49,9 +54,5 @@ const EditLogModal = () => {
     )
 }
 
-const modalStyle = {
-    width: '40%',
-    height: '40%'
-}
 
 export default EditLogModal;

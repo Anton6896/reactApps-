@@ -7,12 +7,14 @@ const Logs = () => {
     const [loading, setLoading] = useState(false)
 
     const getlogs = async () => {
+
         setLoading(true)
         let res = await fetch('/logs')
         let data = await res.json()
         setLogs(data)
         console.log(data)
         setLoading(false)
+
     }
 
     useEffect(() => {

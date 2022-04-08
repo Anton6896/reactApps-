@@ -9,6 +9,9 @@ import AddLogModal from "./components/modals/AddLogModal";
 import EditLogModal from "./components/modals/EditLogModal";
 import AddTechModal from "./components/modals/AddTechModal";
 
+import {Provider} from "react-redux";
+import store from "./store";
+
 export default function App() {
 
     useEffect(() => {
@@ -16,7 +19,7 @@ export default function App() {
     }, [])
 
     return (
-        <div>
+        <Provider store={store}>
             <NavBar/>
             <div className={"container"}>
                 <Logs/>
@@ -25,8 +28,6 @@ export default function App() {
                 <AddTechModal/>
                 <AddBtn/>
             </div>
-
-
-        </div>
+        </Provider>
     );
 }

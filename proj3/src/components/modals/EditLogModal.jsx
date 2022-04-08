@@ -1,13 +1,19 @@
 import React, {useState} from "react";
 import M from 'materialize-css/dist/js/materialize.min.js'
 
+
+const modalStyle = {
+    width: '75%',
+    height: '75%'
+}
+
 const EditLogModal = () => {
     const [message, setMessage] = useState('')
     const [tech, setTech] = useState('')
     const [attention, setAttention] = useState(false)
 
     const onSubmit = () => {
-        if (message === '' || tech === ''){
+        if (message === '' || tech === '') {
             M.toast({html: 'Please fill form '})
         }
 
@@ -68,9 +74,5 @@ const EditLogModal = () => {
     )
 }
 
-const modalStyle = {
-    width: '75%',
-    height: '75%'
-}
 
 export default EditLogModal;
