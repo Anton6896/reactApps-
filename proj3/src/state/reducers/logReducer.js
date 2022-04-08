@@ -18,6 +18,11 @@ const logReducer = (state = initialState, action) => {
             return {...state, error: action.payload}
         case type.GET_LOGS:
             return {...state, logs: action.payload, loading: false}
+        case type.ADD_LOG:
+            return {
+                ...state, logs: [action.payload, ...state.logs]
+            }
+
 
         default:
             return state

@@ -9,7 +9,7 @@ export const setLoading = () => {
 export const getLogs = () => async (dispatch) => {
     try {
         setLoading()
-        const res = await fetch('/logs')
+        const res = await fetch('/logs?_sort=id&_order=desc')
         const data = await res.json()
         dispatch({
             type: type.GET_LOGS,
@@ -24,34 +24,38 @@ export const getLogs = () => async (dispatch) => {
     }
 }
 
+
 export const creteLog = (data) => async (dispatch) => {
-    try {
-        let date = new Date();
-        let raw = JSON.stringify({
-            "message": data.message,
-            "attention": data.attention,
-            "tech": data.tech,
-            "date": date.toISOString()
-        });
+    let date = new Date();
+    let raw = JSON.stringify({
+        "message": data.message,
+        "attention": data.attention,
+        "tech": data.tech,
+        "date": date.toISOString()
+    });
 
-        let requestOptions = {
-            method: 'POST',
-            body: raw
-        };
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-        const res = await fetch('/logs', requestOptions)
-        const data = await res.json()
+    let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw
+    };
 
-        dispatch({
-            type: type.ADD_LOG,
-            payload: data
+    fetch('/logs', requestOptions)
+        .then(res => res.json())
+        .then(data => {
+            dispatch({
+                type: type.ADD_LOG,
+                payload: data
+            })
         })
-
-    } catch (e) {
-        dispatch({
-            type: type.LOGS_ERROR,
-            payload: e.response.data
+        .catch(e => {
+            dispatch({
+                type: type.LOGS_ERROR,
+                payload: e.response
+            })
         })
-    }
 }
 

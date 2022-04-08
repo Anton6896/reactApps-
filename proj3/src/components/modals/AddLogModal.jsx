@@ -1,5 +1,8 @@
 import React, {useState} from "react";
 import M from 'materialize-css/dist/js/materialize.min.js'
+import {useDispatch} from "react-redux"
+import * as actions from '../../state/actions/logActions'
+import {bindActionCreators} from "redux";
 
 const modalStyle = {
     width: '75%',
@@ -12,11 +15,19 @@ const AddLogModal = () => {
     const [tech, setTech] = useState('')
     const [attention, setAttention] = useState(false)
 
+    const dispatch = useDispatch()
+    const {creteLog} = bindActionCreators(actions, dispatch)
+
     const onSubmit = () => {
         if (message === '' || tech === '') {
             M.toast({html: 'Please fill form '})
         }
 
+        creteLog({
+            message: message,
+            attention: attention,
+            tech: tech
+        })
 
         //    clear fields
         setMessage('')
