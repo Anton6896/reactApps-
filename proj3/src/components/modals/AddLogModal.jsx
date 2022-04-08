@@ -7,6 +7,7 @@ const modalStyle = {
 }
 
 const AddLogModal = () => {
+
     const [message, setMessage] = useState('')
     const [tech, setTech] = useState('')
     const [attention, setAttention] = useState(false)
@@ -16,9 +17,6 @@ const AddLogModal = () => {
             M.toast({html: 'Please fill form '})
         }
 
-        console.log(message)
-        console.log(tech)
-        console.log(attention)
 
         //    clear fields
         setMessage('')

@@ -7,6 +7,8 @@ const initialState = {
     error: null
 }
 
+// todo add messages system to show errors
+
 const logReducer = (state = initialState, action) => {
     switch (action.type) {
         case type.SET_LOADING:

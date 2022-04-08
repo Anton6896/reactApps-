@@ -8,6 +8,7 @@ const modalStyle = {
 }
 
 const EditLogModal = () => {
+
     const [message, setMessage] = useState('')
     const [tech, setTech] = useState('')
     const [attention, setAttention] = useState(false)
@@ -16,7 +17,6 @@ const EditLogModal = () => {
         if (message === '' || tech === '') {
             M.toast({html: 'Please fill form '})
         }
-
     }
 
     return (

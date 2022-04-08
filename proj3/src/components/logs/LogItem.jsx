@@ -2,6 +2,9 @@ import React from "react";
 import Moment from 'react-moment'
 
 const LogItem = ({log}) => {
+
+    // add delete log action
+
     return (
         <li className={"collection-item"}>
             <a href={"#edit-log-modal"}
