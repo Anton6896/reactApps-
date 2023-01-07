@@ -24,7 +24,7 @@ function MyTabs() {
   const currentTab = routeMatch?.pattern?.path;
 
   return (
-    <Tabs value={currentTab}>
+    <Tabs value={currentTab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Tab label="Home" value="/" to="/" component={Link} />
       <Tab label="Store" value="/store" to="/store" component={Link} />
       <Tab label="About" value="/about" to="/about" component={Link} />
@@ -34,7 +34,7 @@ function MyTabs() {
 
 export function AppNavbar() {
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%"}}>
       <MyTabs />
     </Box>
   );
