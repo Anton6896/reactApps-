@@ -3,6 +3,9 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Link, matchPath, useLocation } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
+import Badge from "@mui/material/Badge";
 
 // https://mui.com/material-ui/guides/routing/#:~:text=))%3B-,Tabs,-Current%20route%3A
 function useRouteMatch(patterns: readonly string[]) {
@@ -24,7 +27,7 @@ function MyTabs() {
   const currentTab = routeMatch?.pattern?.path;
 
   return (
-    <Tabs value={currentTab} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Tabs value={currentTab}>
       <Tab label="Home" value="/" to="/" component={Link} />
       <Tab label="Store" value="/store" to="/store" component={Link} />
       <Tab label="About" value="/about" to="/about" component={Link} />
@@ -34,8 +37,38 @@ function MyTabs() {
 
 export function AppNavbar() {
   return (
-    <Box sx={{ width: "100%"}}>
-      <MyTabs />
+    <Box
+      sx={{
+        display: "grid",
+        gridAutoColumns: "1fr",
+        gap: 1,
+        borderBottom: 1,
+        borderColor: "divider",
+      }}
+    >
+      <Box sx={{ gridRow: "1", gridColumn: "span 2" }}>
+        <MyTabs />
+      </Box>
+      <Box
+        sx={{
+          gridRow: "1",
+          gridColumn: "5 / 5",
+          textAlign: "center",
+        }}
+      >
+        <IconButton
+          size="large"
+          aria-label="see data"
+          color="inherit"
+          onClick={() => {
+            console.log("click");
+          }}
+        >
+          <Badge badgeContent={4} color="primary">
+            <AutoAwesomeMotionIcon />
+          </Badge>
+        </IconButton>
+      </Box>
     </Box>
   );
 }
