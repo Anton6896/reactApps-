@@ -4,3 +4,5 @@
 - final github code from curse <https://github.com/WebDevSimplified/react-ts-shopping-cart>
 
 - mui <https://mui.com/material-ui/react-button/>
+
+this is an initial setup with react + type script + mui 
