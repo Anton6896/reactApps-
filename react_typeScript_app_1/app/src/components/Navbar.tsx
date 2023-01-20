@@ -44,6 +44,7 @@ export function AppNavbar() {
         gap: 1,
         borderBottom: 1,
         borderColor: "divider",
+        margin: '0 0 3% 0',
       }}
     >
       <Box sx={{ gridRow: "1", gridColumn: "span 2" }}>

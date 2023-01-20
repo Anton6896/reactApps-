@@ -19,13 +19,6 @@ export function Store() {
     if (items.length < 1) getItems();
   }, []);
 
-  interface ItemData {
-    id: number;
-    name: string;
-    price: number;
-    imgUrl: string;
-  }
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid
