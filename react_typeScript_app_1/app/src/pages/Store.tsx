@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchItems } from "../utils/util";
 import { ItemComponent } from "../components/ItemComponent";
+import { ItemComponentProps } from "../types/Types";
 
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -26,9 +27,9 @@ export function Store() {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {items.map((item, idx) => (
-          <Grid item xs={2} sm={4} md={4} key={idx}>
-            <ItemComponent item={item} />
+        {items.map((item: ItemComponentProps) => (
+          <Grid item xs={4} sm={4} md={4} key={item.id}>
+            <ItemComponent {...item} />
           </Grid>
         ))}
       </Grid>

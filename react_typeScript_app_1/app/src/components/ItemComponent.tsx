@@ -15,17 +15,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { ItemComponentProps } from "../types/Types";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
 
-interface ItemData {
-  id: number;
-  name: string;
-  price: number;
-  imgUrl: string;
-}
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
@@ -38,13 +33,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-// anton its not good typescript passing data
-export function ItemComponent({item}: ItemData) {
+export function ItemComponent({ id, name, price, imgUrl }: ItemComponentProps) {
   const [expanded, setExpanded] = useState(false);
+  const id_ = `the id ${id}, price ${price}`
 
   const handleExpandClick = () => {
-    console.log(item);
-    
     setExpanded(!expanded);
   };
 
@@ -61,13 +54,13 @@ export function ItemComponent({item}: ItemData) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={name}
+        subheader={id_}
       />
       <CardMedia
         component="img"
         height="194"
-        image={item.imgUrl}
+        image={imgUrl}
         alt="Paella dish"
       />
       <CardContent>
@@ -109,18 +102,6 @@ export function ItemComponent({item}: ItemData) {
             onion, salt and pepper, and cook, stirring often until thickened and
             fragrant, about 10 minutes. Add saffron broth and remaining 4 1/2
             cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is
-            absorbed, 15 to 18 minutes. Reduce heat to medium-low, add reserved
-            shrimp and mussels, tucking them down into the rice, and cook again
-            without stirring, until mussels have opened and rice is just tender,
-            5 to 7 minutes more. (Discard any mussels that don&apos;t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then
-            serve.
           </Typography>
         </CardContent>
       </Collapse>
